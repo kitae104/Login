@@ -1,53 +1,48 @@
 ####################################
-# ?? ? ???? ?? ??
+# 포트 및 프로젝트 명칭 설정
 ####################################
 server:
   servlet:
     encoding:
-      charset: UTF-8          # ?? ??? ??
-      force: true             # ?? ??
+      charset: UTF-8          # 한글 인코딩 설정
+      force: true             # 강제 설정
 
 spring:
+  config:
+    import: "optional:classpath:application-db.yml"  # DB 설정 파일 추가
+
   application:
-    name: springboot-login     # ????? ??
+    name: springboot-login     # 프로젝트명 설정
 
   devtools:
     livereload:
-      enabled: true           # ?? ??? ??
+      enabled: true           # 자동 리로드 설정
     restart:
-      enabled: true           # ?? ??? ??
-      preserve-session: true  # ?? ?? ??
+      enabled: true           # 자동 재실행 설정
+      preserve-session: true  # 세션 유지 설정
 
   thymeleaf:
-    cache: false              # ?? ??
+    cache: false              # 캐쉬 없음
+
 
   ####################################
-  # ?????? ??
-  ####################################
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spring_login?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
-    username: root
-    password: 1234
-
-  ####################################
-  # JPA ??
+  # JPA 설정
   ####################################
   jpa:
     open-in-view: true      #
     hibernate:
       ddl-auto: create  #, update, ...
       naming:
-        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy # ????? ???? ??? ??
-    show-sql: true          # SQL ?? ???
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy # 카멜표기를 스네이크 표기로 변환
+    show-sql: true          # SQL 구문 보이기
     properties:
       hibernate:
-        format_sql: true    # ?? ???? ???
-        default_batch_fetch_size: 1000  # ??? ??? ??? ? in ?? ?? ??
-    #database-platform: org.hibernate.dialect.MySQL8Dialect  # MySQL8 ?? ??
+        format_sql: true    # 포멧 처리해서 보이기
+        default_batch_fetch_size: 1000  # 한번에 가져올 데이터 양 in 으로 쿼리 처리
+    #database-platform: org.hibernate.dialect.MySQL8Dialect  # MySQL8  최근에는 사용 안해도 됨.
 
 ####################################
-# ?? ?? ??
+# 로그 정보 설정
 ####################################
 logging:
   level:
@@ -55,14 +50,6 @@ logging:
       hibernate:
         type:
           descriptor:
-            sql: trace  # ???? ??? ???? ??
+            sql: trace  # 물음표에 바인드 파라미터 출력
 
-####################################
-# ??? ???
-####################################
-kakao:
-  client:
-    id: 159bd3492eb75e050b8a1a3f7b8168e2
-    secret: 055d26ac9f574c9d44c22bdea09dbd38
-  redirect:
-    url: http://localhost:8080/kakao/callback
+
